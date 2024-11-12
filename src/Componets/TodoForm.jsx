@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 const TodoForm = ({onAddTodo}) => {
-  const [inputValue, setInput] = useState("");
+  const [inputValue, setInput] = useState({});
   const handleInputChange = (value) => {
-    setInput(value);
+    setInput({id:value,content:value,checked:false});
   };
 
   const handleFormSubmit = (e) =>{
     e.preventDefault();
     onAddTodo(inputValue);
-    setInput("");
+    setInput({id:"",content:"",checked:false});
   }
 
   return (
@@ -17,7 +17,7 @@ const TodoForm = ({onAddTodo}) => {
       <form onSubmit={handleFormSubmit} className="flex flex-col items-center">
         <input
           type="text"
-          value={inputValue}
+          value={inputValue.content}
           onChange={(e) => handleInputChange(e.target.value)}
           placeholder="Enter a task"
           className="px-4 py-2 w-64 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all duration-200"

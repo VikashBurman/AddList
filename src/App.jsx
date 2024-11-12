@@ -3,7 +3,6 @@ import HomePage from './Componets/HomePage'
 
 const App = () => {
   return (
-    // <div>App</div>
     <HomePage/>
   )
 }

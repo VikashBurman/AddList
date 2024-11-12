@@ -5,21 +5,28 @@ import TodoList from "./TodoList";
 const HomePage = () => {
   const [task, setTask] = useState([]);
   const handleFormSubmit = (inputValue) => {
-    if (!inputValue) return;
-    if (task.includes(inputValue)) {
-      return;
-    }
+    // if (!inputValue) return;
+    const { id, content, checked } = inputValue;
+    if (!content) return;
+    // if (task.includes(inputValue)) {
+    //   return;  //for an array only
+    // }
+    const AlreadyTask = task.find((currTask) => (
+      currTask.content === content
+    ));
+    if (AlreadyTask) return;
+
     setTask((prevTask) => {
-      return [...prevTask, inputValue];
+      return [...prevTask, { id: id, content: content, checked: checked }];
     });
   };
 
-  const handleDelete =(value)=>{
-    const updatedTask = task.filter((currTask)=>{
-      return currTask !== value
-    })
+  const handleDelete = (value) => {
+    const updatedTask = task.filter((currTask) => {
+      return currTask.content !== value;
+    });
     setTask(updatedTask);
-  }
+  };
 
   return (
     <div className="flex flex-col  items-center mt-10 space-y-6">
@@ -27,12 +34,17 @@ const HomePage = () => {
         My List
       </h1>
 
-      <TodoForm onAddTodo={handleFormSubmit}/>
-      
+      <TodoForm onAddTodo={handleFormSubmit} />
+
       <ul className="mt-4 w-64 space-y-2">
-        {task.map((currTask, index) => {
-          return <TodoList key={index} data={currTask} 
-          onHandleDelete={handleDelete} />
+        {task.map((currTask) => {
+          return (
+            <TodoList
+              key={currTask.id}
+              data={currTask.content}
+              onHandleDelete={handleDelete}
+            />
+          );
         })}
       </ul>
     </div>

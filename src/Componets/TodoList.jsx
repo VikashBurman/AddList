@@ -1,10 +1,10 @@
 import React from 'react'
 
-const TodoList = ({key,data,onHandleDelete}) => {
+const TodoList = ({data,onHandleDelete}) => {
   return (
     <>
          <li
-            key={key}
+            // key={key}
             className="flex items-center justify-between bg-white border border-gray-300 px-4 py-2 rounded-lg shadow-md hover:bg-gray-100 transition-all duration-200"
           >
             <span className="text-gray-700">{data}</span>
@@ -16,7 +16,7 @@ const TodoList = ({key,data,onHandleDelete}) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6 text-blue-500" // Adjust size and color as needed
+                className="w-6 h-6 text-blue-500" 
               >
                 <path
                   strokeLinecap="round"

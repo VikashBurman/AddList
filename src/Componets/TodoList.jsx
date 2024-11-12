@@ -1,14 +1,14 @@
 import React from 'react'
 
-const TodoList = ({data,onHandleDelete}) => {
+const TodoList = ({checked,data,onHandleDelete,onHandleChecked}) => {
   return (
     <>
          <li
             // key={key}
             className="flex items-center justify-between bg-white border border-gray-300 px-4 py-2 rounded-lg shadow-md hover:bg-gray-100 transition-all duration-200"
           >
-            <span className="text-gray-700">{data}</span>
-            <div className="flex items-center space-x-2">
+            <span className={`text-gray-700 ${checked? 'line-through' : 'no-underline'}`}>{data}</span>
+            <div className="flex items-center space-x-4">
               {/* Tick SVG Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,8 @@ const TodoList = ({data,onHandleDelete}) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6 text-blue-500" 
+                className="w-6 h-6 text-blue-500 cursor-pointer" 
+                onClick={()=>{onHandleChecked(data)}}
               >
                 <path
                   strokeLinecap="round"
@@ -32,7 +33,7 @@ const TodoList = ({data,onHandleDelete}) => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6 text-red-500 cursor-pointer"
+                className="w-5 h-5 text-red-500 cursor-pointer"
                 onClick={()=>onHandleDelete(data)}
               >
                 <path

@@ -11,9 +11,7 @@ const HomePage = () => {
     // if (task.includes(inputValue)) {
     //   return;  //for an array only
     // }
-    const AlreadyTask = task.find((currTask) => (
-      currTask.content === content
-    ));
+    const AlreadyTask = task.find((currTask) => currTask.content === content);
     if (AlreadyTask) return;
 
     setTask((prevTask) => {
@@ -24,6 +22,17 @@ const HomePage = () => {
   const handleDelete = (value) => {
     const updatedTask = task.filter((currTask) => {
       return currTask.content !== value;
+    });
+    setTask(updatedTask);
+  };
+
+  const handleChecked = (content) => {
+    const updatedTask = task.map((currTask) => {
+      if (currTask.content === content) {
+        return { ...currTask, checked: !currTask.checked };
+      } else {
+        return currTask;
+      }
     });
     setTask(updatedTask);
   };
@@ -41,8 +50,10 @@ const HomePage = () => {
           return (
             <TodoList
               key={currTask.id}
+              checked={currTask.checked}
               data={currTask.content}
               onHandleDelete={handleDelete}
+              onHandleChecked={handleChecked}
             />
           );
         })}
